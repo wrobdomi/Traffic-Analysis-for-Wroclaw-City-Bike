@@ -15,19 +15,19 @@ class Route:
         self.to_station_longitude = to_station_longitude
         self.expected_time = 0
         self.route_points = []
+        # route points in format: [[17.012168, 51.113156], [17.011957, 51.113113], ... ]
 
     def __repr__(self):
-        return "Route from {} to {} Coords: ( {}, {} ) -> ( {}, {} )"\
+        return "Route from {} to {} Coords: ( {}, {} ) -> ( {}, {} ), expected: {}"\
             .format(self.from_station_name, self.to_station_name,
                     self.from_station_latitude, self.from_station_longitude,
-                    self.to_station_latitude, self.to_station_longitude)
+                    self.to_station_latitude, self.to_station_longitude,
+                    self.expected_time)
 
     @classmethod
     def create_routes(cls, stations):
-        print("Hello")
         routes_arr = []
         for i, s1 in enumerate(stations):
-            print("1")
             for j, s2 in enumerate(stations):
                 if i == j:
                     continue
