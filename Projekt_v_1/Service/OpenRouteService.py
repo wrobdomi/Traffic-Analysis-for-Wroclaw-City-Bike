@@ -14,7 +14,7 @@ class OpenRouteService:
         return query
 
 
-    def getProbableRouteAndTime(self, route):
+    def get_probable_route_and_time(self, route):
 
         query = self.create_query(route.from_station_latitude,
                                   route.from_station_longitude,

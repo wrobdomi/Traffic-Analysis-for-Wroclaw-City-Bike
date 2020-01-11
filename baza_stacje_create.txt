@@ -1,0 +1,18 @@
+-- Table: public.stacje
+
+-- DROP TABLE public.stacje;
+
+CREATE TABLE public.stacje
+(
+    id bigint NOT NULL DEFAULT nextval('stacje_id_seq'::regclass),
+    numer integer NOT NULL,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
+    nazwa text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT stacje_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.stacje
+    OWNER to postgres;

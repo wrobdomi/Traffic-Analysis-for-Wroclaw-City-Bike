@@ -1,0 +1,18 @@
+-- Table: public.wypozyczenia
+
+-- DROP TABLE public.wypozyczenia;
+
+CREATE TABLE public.wypozyczenia
+(
+    id bigint NOT NULL DEFAULT nextval('wypozyczenia_id_seq'::regclass),
+    data_wynajmu timestamp without time zone NOT NULL,
+    data_zwrotu timestamp without time zone NOT NULL,
+    stacja_wynajmu text COLLATE pg_catalog."default" NOT NULL,
+    stacja_zwrotu text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT wypozyczenia_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.wypozyczenia
+    OWNER to postgres;

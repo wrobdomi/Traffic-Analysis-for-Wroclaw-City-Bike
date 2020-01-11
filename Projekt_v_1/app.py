@@ -1,6 +1,7 @@
 from Models.Station import Station
 from Models.Route import Route
 from Service.OpenRouteService import  OpenRouteService
+from Service.DatabaseServicePsql import DatabaseServicePsql
 
 # data  structures
 stations = []
@@ -9,6 +10,7 @@ points = []
 
 # services
 open_route_service = OpenRouteService()
+database_service = DatabaseServicePsql()
 
 # stations set up
 stations_source_file = "../Data/input_stations.csv"
@@ -29,6 +31,9 @@ routes = Route.create_routes(stations)
 #                                           r.to_station_longitude))
 
 # for every route:
-open_route_service.getProbableRouteAndTime(routes[0])
+open_route_service.get_probable_route_and_time(routes[0])
+
+database_service.get_number_of_proper_records(routes[0])
+
 
 
