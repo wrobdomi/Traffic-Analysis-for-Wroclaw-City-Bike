@@ -1,12 +1,13 @@
 from Models.Station import Station
 from Models.Route import Route
+from Models.Point import Point
 from Service.OpenRouteService import  OpenRouteService
 from Service.DatabaseServicePsql import DatabaseServicePsql
 
 # data  structures
 stations = []
 routes = []
-points = []
+points = dict()
 
 # services
 open_route_service = OpenRouteService()
@@ -24,16 +25,21 @@ routes = Route.create_routes(stations)
 #    print(r)
 
 
-# for r in routes:
-#     print(open_route_service.create_query(r.from_station_latitude,
-#                                           r.from_station_longitude,
-#                                           r.to_station_latitude,
-#                                           r.to_station_longitude))
+for r in routes:
+    open_route_service.get_probable_route_and_time(r)
 
-# for every route:
-open_route_service.get_probable_route_and_time(routes[0])
+    proper_records_number = database_service.get_number_of_proper_records(r)
 
-database_service.get_number_of_proper_records(routes[0])
+    route_points_list = r.get_route_points_list()
 
+    # print(route_points_list)
 
+    for single_point in route_points_list:
+        if single_point in points:
+            points[single_point] += proper_records_number
+        else:
+            points[single_point] = proper_records_number
+            Point.number_of_all_registered_points += 1
 
+    print(len(points))
+    print(", ")

@@ -27,7 +27,7 @@ class OpenRouteService:
         r = requests.get(query)
 
         # print JSON response
-        print(r.json())
+        # print(r.json())
 
         json_response = r.json()
 

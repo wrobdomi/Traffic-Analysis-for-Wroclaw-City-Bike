@@ -17,7 +17,7 @@ class Station:
     @classmethod
     def load_stations_from_file(cls, filename):
         stations_arr = []
-        with open(filename, 'r') as f:
+        with open(filename, 'r', encoding='utf-8') as f:
             reader = csv.reader(f)
             for line in reader:
                 stations_arr.append(cls(int(line[0]), float(line[1]), float(line[2]), line[3]))

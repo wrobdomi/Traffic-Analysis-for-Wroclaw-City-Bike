@@ -1,3 +1,5 @@
+from Models.Point import Point
+
 class Route:
 
     # latitude - szerokosc
@@ -36,3 +38,9 @@ class Route:
                     s1.latitude, s1.longitude,
                     s2.latitude, s2.longitude))
         return routes_arr
+
+    def get_route_points_list(self):
+        points_list = []
+        for p in self.route_points:
+            points_list.append(Point(p[0], p[1]))
+        return points_list
