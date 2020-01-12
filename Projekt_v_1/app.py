@@ -41,5 +41,9 @@ for r in routes:
             points[single_point] = proper_records_number
             Point.number_of_all_registered_points += 1
 
-    print(len(points))
-    print(", ")
+    # print(len(points))
+    # print(", ")
+
+# tuples = database_service.convert_points_dict_to_tuples_list(points)
+# print(tuples)
+database_service.save_points_in_database(points)

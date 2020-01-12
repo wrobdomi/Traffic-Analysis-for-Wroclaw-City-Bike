@@ -21,6 +21,7 @@ class Point:
         return hash(str(self))
 
 
+
 # Points playground
 # pointOne = Point(17.045083,51.1004)
 # pointTwo = Point(17.030175,51.109782)

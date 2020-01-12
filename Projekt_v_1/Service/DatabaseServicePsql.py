@@ -1,4 +1,5 @@
 import psycopg2
+from psycopg2.extras import execute_values
 
 class DatabaseServicePsql:
 
@@ -9,6 +10,11 @@ class DatabaseServicePsql:
     field_name_data_zwrotu = "data_zwrotu"
     field_name_stacja_wynajmu = "stacja_wynajmu"
     field_name_stacja_zwrotu = "stacja_zwrotu"
+
+    geo_table_name = "punkty"
+    geo_field_id = "id"
+    geo_field_geom = "geom"
+    geo_field_label = "label"
 
     def __init__(self):
         self.user = "postgres"
@@ -69,3 +75,20 @@ class DatabaseServicePsql:
 
     def get_difference_margin(self, expected_time_minutes):
         return expected_time_minutes - self.required_coefficient * expected_time_minutes
+
+    def save_points_in_database(self, points_dict):
+        rows_list = self.convert_points_dict_to_tuples_list(points_dict)
+        sql = "INSERT INTO punkty (geom, label) VALUES %s"
+        with self.connect_to_db() as connection:
+            with connection.cursor() as cursor:
+                execute_values(cursor, sql, rows_list,
+                            template="(ST_GeomFromText(%s , 4326), %s)")
+
+    def convert_points_dict_to_tuples_list(self, point_dict):
+        rows = []
+        for point in point_dict:
+            point_tuple = (
+                "POINT(" + str(point.latitude) + " " + str(point.longitude) + ")",
+                point_dict[point])
+            rows.append(point_tuple)
+        return rows;
