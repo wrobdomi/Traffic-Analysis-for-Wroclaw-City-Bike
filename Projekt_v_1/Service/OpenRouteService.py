@@ -4,7 +4,7 @@ import requests
 class OpenRouteService:
 
     def __init__(self):
-        self.api_key = "5b3ce3597851110001cf6248782ac85e6e35409582ad067fef1ded89"
+        self.api_key = "private"
         self.base_url = "https://api.openrouteservice.org/v2/directions/cycling-regular?api_key="
 
     def create_query(self, from_latitude, from_longitude, to_latitude, to_longitude):
