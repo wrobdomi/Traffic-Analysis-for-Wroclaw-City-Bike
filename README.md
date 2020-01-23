@@ -36,12 +36,13 @@ zwrócenie go na dowolnej innej stacji. Projekt ma pokazać, które z ulic są
 najczęściej wybierane przez użytkowników rowerów miejskich. 
 
 Dzięki takim danym możliwe będzie lepsze dostosowanie liczby rowerów na
-poszczególnych stacjach, a także zmiana lokalizacji stacji na bardziej korzystne.
+poszczególnych stacjach, a także zmiana lokalizacji stacji na bardziej korzystne. Innym potencjalnym
+zastosowiem może być rozlokowanie reklam dedykowanych dla rowerzystów.
 
 ## Dane i ich źródła
 
 ### Źródła danych
-W projekcie korzystamy z dwóch źródeł danych:
+W projekcie użyto dwóch źródeł danych:
 + API wrocławskiego roweru miejskiego (WRM) - dane dotyczące przejazdów i lokalizacji stacji
 
 https://www.wroclaw.pl/open-data/dataset/przejazdy-wroclawskiego-roweru-miejskiego-archiwalne
@@ -53,7 +54,7 @@ https://www.wroclaw.pl/open-data/dataset/nextbikesoap_data
 https://openrouteservice.org/
 
 ### API WRM
-API wrocławskiego roweru miejskiego udostępnia dane (wymieniamy te dla nas ważne):
+API wrocławskiego roweru miejskiego udostępnia dane (te ważne z perspektywy projektu):
 + O lokalizacjach stacji: nazwa stacji, szerokość i długość geograficzna, przykład:
 
 | lat           | lng           | name  |
@@ -122,15 +123,15 @@ Odpwiadający fragment GeoJson:
 
 
 ## Proponowane rozwiązanie
-W naszym rozwiązaniu chcemy dla każdej możliwe trasy, którą wybrali rowerzyści 
+W moim rozwiązaniu chcę dla każdej możliwej trasy, którą wybrali rowerzyści 
 (tj. takiej, która została zarejestrowana w bazie danych WRM) wyznaczyć trasę 
 przejazdu oraz prawdopodony czas na podstawie danych z ORS.
 
 Następnie wyznaczyć liczbę przejazdów w każdym punkcie tej trasy 
 [Zliczanie przejazdów w punkcie](#zliczanie-przejazdów-w-punkcie)
 
-Punkty oraz liczbę wytąpień zapisujemy w bazie danych, następnie dane
-wyświetlamy na mapie OSM w oprogramowaniu QGIS.
+Punkty oraz liczbę wytąpień zapisuje w bazie danych, następnie dane
+wyświetlam na mapie OSM w oprogramowaniu QGIS.
 
 Szczegółowy model danych i algorytm opisane są poniżej:
 
@@ -213,9 +214,8 @@ Ogólny wzór na liczbę tras dla n stacji, to:
 
 [wzor]: img/wzor.PNG "Title Text"
 
-Zakładamy, że trasa z X do Y może być różna od stacji Y do X (np. droga jednokierunkowa). 
-Nie bierzemy pod uwagę stacji z X do X.
-
+Przyjęto, że trasa z X do Y może być różna od stacji Y do X (np. droga jednokierunkowa). 
+Do analizy nie wchodzą stacje z X do X.
 
 + Duża liczba rekordów przejazdów ma taką samą stację zwrotu jak i wynajmu
 
@@ -259,7 +259,7 @@ Przykładowo stacja Dworzec Główny PKP z danych z roku 2015 nie jest obecna w 
 geograficznie stacji i przeprowadzeniu analizy tylko dla nich.  
 + Dodatkowo wybierane stacje będą tymi, które istniały już w 2015 roku aby uzyskać zgodność z danymi 
 o zarejestrowanych przejazdach.
-+ Z analizy odrzucamy przejazdy, które mają taką samą stacje wynajmu i zwrotu
++ Z analizy odrzucono przejazdy, które mają taką samą stacje wynajmu i zwrotu
 
 Link do mapy ze wszystkimi stacjami: https://wroclawskirower.pl/mapa-stacji/
 
@@ -275,7 +275,7 @@ Gdzie p jest ustalonym prawdopodobieństwem (współczynnik pewności).
 
 Przykład
 
-Przyjmijmy następujące dane:
+Przyjmując następujące dane:
 
 ![alt text1][obl1]
 
@@ -341,7 +341,7 @@ są w aktualnych danych wrocławskiego roweru miejskiego (2020), ale nie ma ich 
 
 [sda]: img/stacje_do_analizy.png "Title Text"
 
-Z bazy danych wybrano dane o tych stacjach, następnie dostosowano je do formatu nazw z roku 2015 (zamiana / na - itp.) i utworzona na tej podstawie plik .csv, 
+Z bazy danych wybrano dane o tych stacjach, następnie dostosowano je do formatu nazw z roku 2015 (zamiana / na - itp.) i utworzono na tej podstawie plik .csv, 
 który jest plikiem wsadowym do programu.
 
 ```sql
@@ -407,12 +407,12 @@ dwusekundowe opóźnienie po każdym zapytaniu.
 
 ## Rozszerzenie modelu na wszystkie stacje
 
-Naszym kolejnym krokiem było rozszerzenie działania programu do jak największej 
+Kolejnym krokiem było rozszerzenie działania programu do jak największej 
 możliwej liczby stacji, która mieściłaby się w zakresie dopuszczalnej liczby zapytań do ORS (2000 na dobę).
 
 W tym wykonaliśmy analizę porównawczą stacji obecnych w rekordach z roku 2015 i 2020. Analiza ta
 z uwagi na relatywnie małą liczbę stacji została przeprowadzona ręcznie przez przegląd zupełny, zadanie
-ułatwiło nam wybranie stacji z bazy danych oraz z rekordów w kolejności alfabetycznej. 
+ułatwiło wybranie stacji z bazy danych oraz z rekordów w kolejności alfabetycznej. 
 
 Wyniki analizy porównawczej przedstawione są poniżej. Kolorem zielonym oznaczono
 stacje, które są w aktualnych rekordach stacji, kolorem czerwonym te których już 
@@ -432,7 +432,7 @@ W sumie otrzymaliśmy 45 stacji dla których mogliśmy znaleźć współrzędne 
 ## Test 2 wszystkie 45 stacji
 
 Kolejny test przeprowadzono dla wszytkich stacji, które obecne są w pomiarach z 2015 roku oraz w aktualnych danych o stacjach
-wrocławskiego roweru miejskiego (czyli dla wszystkich tych stacji z 2015 dla których jesteśmy w stanie ustalić współrzędne geograficzne).
+wrocławskiego roweru miejskiego (czyli dla wszystkich tych stacji z 2015 dla których możliwe jest ustalenie współrzędnych geograficznych).
 Stacji takich jest 45, ich rozlokowanie prezentuje mapa poniżej:
 
 ![alt text1][wszystkie]
