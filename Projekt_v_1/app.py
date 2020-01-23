@@ -14,7 +14,7 @@ open_route_service = OpenRouteService()
 database_service = DatabaseServicePsql()
 
 # stations set up
-stations_source_file = "../Data/input_stations.csv"
+stations_source_file = "../Data/input_stations_extended.csv"
 stations = Station.load_stations_from_file(stations_source_file)
 # for s in stations:
 #    print(s)
@@ -24,6 +24,7 @@ routes = Route.create_routes(stations)
 # for r in routes:
 #    print(r)
 
+counter = 1
 
 for r in routes:
     open_route_service.get_probable_route_and_time(r)
@@ -41,7 +42,10 @@ for r in routes:
             points[single_point] = proper_records_number
             Point.number_of_all_registered_points += 1
 
-    # print(len(points))
+    counter = counter + 1
+    print(counter)
+    print(len(points))
+    print(".")
     # print(", ")
 
 # tuples = database_service.convert_points_dict_to_tuples_list(points)

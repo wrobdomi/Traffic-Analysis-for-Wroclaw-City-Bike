@@ -1,0 +1,21 @@
+SELECT numer, longitude, latitude, nazwa FROM stacje 
+WHERE 
+nazwa IN (
+	'Aleja Bielany',
+	'al. Armii Krajowej / Borowska',
+ 	'Dworzec Główny ',
+ 	'Dworzec Główny, południe',
+ 	'Grabiszyńska / Aleja Hallera',
+ 	'Krucza / Mielecka / Stalowa',
+ 	'Plac Staszica',
+ 	'Plac Strzegomski / Poznańska',
+ 	'Plac Uniwersytecki (UWr)',
+ 	'Powstańcow Śląskich / Aleja Hallera',
+ 	'Racławicka / Rymarska',
+ 	'Skarbowców / Wietrzna',
+ 	'Ślężna / Kamienna (Uniw. Ekonomiczny)',
+ 	'Świdnicka / Piłsudskiego (Hotel Scandic)',
+ 	'Zaporoska / Wielka / Krucza',
+ 	'Żeromskiego / Daszyńskiego'
+ )
+ ORDER BY nazwa;

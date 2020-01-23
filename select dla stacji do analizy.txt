@@ -1,0 +1,34 @@
+SELECT numer, longitude, latitude, nazwa FROM stacje 
+WHERE 
+nazwa IN (
+	'Rynek',
+	'Kościuszki / Pułaskiego',
+	'Traugutta / Pułaskiego',
+	'Drobnera / Dubois',
+	'Legnicka / Wejherowska',
+	'Zachodnia / Poznańska',
+	'Hallera / Odkrywców',
+	'Grabiszyńska / Stalowa',
+	'Pereca / Grabiszyńska',
+	'Żelazna / Pereca',
+	'Grochowa / Jemiołowa,',
+	'Zaporoska / Grabiszyńska',
+	'Zaporoska / Gajowicka',
+	'Komandorska / Kamienna',
+	'Gliniana / Gajowa',
+	'Traugutta / Kościuszki',
+	'Kościuszki / Komuny Paryskiej / Zgodna',
+	'Plac Legionów',
+	'Wita Stwosza / Szewska',
+	'Plac Grunwaldzki / Polaka',
+	'Rondo Reagana',
+	'Sienkiewicza / Piastowska',
+	'Sienkiewicza / Wyszyńskiego',
+	'Reymonta / Kleczkowska',
+	'Jedności Narodowej / Wyszyńskiego',
+	'Nowowiejska / Wyszyńskiego',
+	'Żeromskiego / Kluczborska',
+	'Mickiewicza / pętla tramwajowa',
+	'Olszewskiego / Spółdzielcza'
+)
+ORDER BY nazwa;
